@@ -1,0 +1,47 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Weather App</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Simple Weather App</h1>
+        </header>
+
+        <main>
+            <div class="weather-container">
+                
+                <form method="POST">
+                    {% csrf_token %}
+                    <input type="text" name="city" placeholder="Enter city name">
+                    <button class="button" type="submit">Get Info</button>
+                </form>
+                
+
+                <div class="weather-info" id="weather-info">
+                    {% if data.temperature %}
+                    <h3>City Name: {{city}} </h3>
+                    <h3>Temprature: {{data.temperature}}</h3>
+                    <h3>Pressure: {{data.pressure}}</h3>
+                    <h3>Humidity: {{data.humidity}}</h3>
+                    {% else %}
+                    <h5>{{data.error}}</h5>
+                    {% endif %}
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Weather App</p>
+        </footer>
+    </div>
+
+</body>
+</html>
